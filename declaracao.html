@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta pra Você 💌</title>
+  <style>
+    body {
+      background-color: #ffeef2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    .envelope {
+      position: relative;
+      width: 90%;
+      max-width: 400px;
+      height: 500px;
+      background: #ffb6c1;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .carta {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .mensagem {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mensagem.ativa {
+      display: flex;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #sim {
+      background-color: #32cd32;
+      margin-right: 10px;
+    }
+
+    #nao {
+      background-color: #ff4444;
+      position: relative;
+    }
+
+    .botoes {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mensagem.final {
+      font-size: 20px;
+      color: #d60065;
+    }
+
+    .brava {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #c70000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="envelope">
+  <div class="carta">
+    <div id="mensagens">
+      <div class="mensagem ativa" id="msg1">
+        Oii Amor ❤️<br>Tenho algo para te dizer 👀<br>
+        <button onclick="proximaMensagem(1)">Clique aqui</button>
+      </div>
+
+      <div class="mensagem" id="msg2">
+        Você chegou em minha vida de um jeito encantador e roubou meu coração.<br>
+        Sou muito grata por te ter em minha vida.
+        <br><button onclick="proximaMensagem(2)">Clique aqui</button>
+      </div>
+
+      <div class="mensagem" id="msg3">
+        O meu amor por você só aumenta. 💗<br>
+        A cada dia tenho mais certeza que é o homem da minha vida, meu presente de Deus 😻
+        <br><button onclick="proximaMensagem(3)">Clique aqui</button>
+      </div>
+
+      <div class="mensagem" id="msg4">
+        Aceita passar o resto da sua vida comigo? 💍
+        <div class="botoes">
+          <button id="sim" onclick="respostaSim()">Sim 💕</button>
+          <button id="nao" onclick="respostaNao()">Não 💔</button>
+        </div>
+        <div class="brava" id="msgErrada"></div>
+      </div>
+
+      <div class="mensagem final" id="msg5">
+        É uma honra ser amada por você!<br>Obrigada por tudo, meu amor.<br>
+        Te amo até o céu! 💖🥰
+      </div>
+
+      <div class="mensagem final" id="bravaFinal">
+        <div style="font-size: 60px; margin-bottom: 10px;">💔</div>
+        <div>Está tudo acabado!</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  let cliqueNao = 0;
+
+  function proximaMensagem(atual) {
+    document.getElementById(`msg${atual}`).classList.remove('ativa');
+    document.getElementById(`msg${atual + 1}`).classList.add('ativa');
+  }
+
+  function respostaSim() {
+    document.getElementById("msg4").classList.remove('ativa');
+    document.getElementById("msg5").classList.add('ativa');
+  }
+
+  function respostaNao() {
+    cliqueNao++;
+
+    const msgErrada = document.getElementById("msgErrada");
+    msgErrada.innerText = "😠 Resposta errada! Tente novamente.";
+
+    const btnNao = document.getElementById("nao");
+    const randTop = Math.floor(Math.random() * 80) + 10;
+    const randLeft = Math.floor(Math.random() * 80) + 10;
+    btnNao.style.position = 'relative';
+    btnNao.style.top = randTop + 'px';
+    btnNao.style.left = randLeft + 'px';
+
+    if (cliqueNao >= 3) {
+      document.getElementById("msg4").classList.remove('ativa');
+      document.getElementById("bravaFinal").classList.add('ativa');
+    }
+  }
+</script>
+
+</body>
+</html>
